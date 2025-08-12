@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:simble_flutter_market/app_components/body.dart';
-import 'package:simble_flutter_market/app_components/navbar.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -15,7 +14,8 @@ class _HomeState extends State<Home> {
     return Scaffold(
       appBar: AppBar(),
       body: Body(),
-      bottomNavigationBar: Navbar(),
+
+      // bottomNavigationBar: Navbar(),
     );
   }
 }
