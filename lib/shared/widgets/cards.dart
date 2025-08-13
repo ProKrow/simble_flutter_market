@@ -1,5 +1,8 @@
+// ignore_for_file: unused_element
+
 import 'package:flutter/material.dart';
 import 'package:simble_flutter_market/constants/app_decorations.dart';
+import 'package:simble_flutter_market/constants/app_text_styles.dart';
 
 // Product model class
 class Product {
@@ -45,16 +48,16 @@ class ProductCard extends Card {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: onTap,
-      borderRadius: BorderRadius.circular(12.0),
+      borderRadius: ComponentBorders.cardBorder,
       child: Container(
-        width: 200,
-        height: 341,
+        width: ComponentSizes.cardWidth,
+        height: ComponentSizes.cardHeight,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(12.0),
           color: AppColors.productCardBgColor,
           boxShadow: [
             BoxShadow(
-              color: Colors.grey.withOpacity(0.2),
+              color: AppColors.shadowColor.withAlpha(150),
               spreadRadius: 1,
               blurRadius: 5,
               offset: const Offset(0, 2),
@@ -64,12 +67,17 @@ class ProductCard extends Card {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Product Image Section
-            _buildImageSection(),
-            // Product Details Section
-            _buildDetailsSection(context),
-            // Action Section
-            _buildActionSection(context),
+            Container(
+              decoration: BoxDecoration(
+                borderRadius: ComponentBorders.cardBorder,
+              ),
+              width: ComponentSizes.cardWidth,
+              child: Image(
+                image: NetworkImage(product.imageUrl),
+                fit: BoxFit.cover,
+              ),
+            ),
+            Text(product.name, style: AppTextStyles.productName),
           ],
         ),
       ),
@@ -133,7 +141,7 @@ class ProductCard extends Card {
               padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
               decoration: BoxDecoration(
                 color: Colors.black54,
-                borderRadius: BorderRadius.circular(8),
+                borderRadius: ComponentBorders.cardBorder,
               ),
               child: Row(
                 mainAxisSize: MainAxisSize.min,
@@ -165,11 +173,7 @@ class ProductCard extends Card {
           // Product Name
           Text(
             product.name,
-            style: const TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.bold,
-              color: Colors.black87,
-            ),
+            style: AppTextStyles.productTitle,
             maxLines: 2,
             overflow: TextOverflow.ellipsis,
           ),
@@ -177,7 +181,7 @@ class ProductCard extends Card {
           // Product Description
           Text(
             product.description,
-            style: TextStyle(fontSize: 12, color: Colors.grey[600]),
+            style: AppTextStyles.productDescription,
             maxLines: 2,
             overflow: TextOverflow.ellipsis,
           ),
@@ -194,21 +198,13 @@ class ProductCard extends Card {
       children: [
         Text(
           '\$${product.price.toStringAsFixed(2)}',
-          style: TextStyle(
-            fontSize: 18,
-            fontWeight: FontWeight.bold,
-            color: product.isOnSale ? Colors.red : Colors.green[700],
-          ),
+          style: AppTextStyles.priceMain,
         ),
         if (product.isOnSale && product.originalPrice != null) ...[
           const SizedBox(width: 8),
           Text(
             '\$${product.originalPrice!.toStringAsFixed(2)}',
-            style: TextStyle(
-              fontSize: 14,
-              color: Colors.grey[500],
-              decoration: TextDecoration.lineThrough,
-            ),
+            style: AppTextStyles.priceSmall,
           ),
         ],
       ],
@@ -223,7 +219,7 @@ class ProductCard extends Card {
         child: ElevatedButton.icon(
           onPressed: onAddToCart,
           icon: const Icon(Icons.add_shopping_cart, size: 18),
-          label: const Text('Add to Cart'),
+          label: const Text('Add to Cart', style: AppTextStyles.buttonPrimary),
           style: ElevatedButton.styleFrom(
             backgroundColor: AppColors.byButtonsColor,
             foregroundColor: Colors.white,

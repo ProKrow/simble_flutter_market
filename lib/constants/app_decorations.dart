@@ -13,6 +13,14 @@ class AppColors {
 }
 
 // ==================== App Sizes =======================
+class ComponentSizes {
+  static const double cardWidth = 100.0;
+  static const double cardHeight = 150.0;
+  static const double cardBorderRadius = 10.0;
+  static const double cardPadding = 8.0;
+  static const double cardMargin = 16.0;
+}
 
-// ================ Transparency Values ==================
-double mainColorTransparency = 10.0; // Demo
+class ComponentBorders {
+  static BorderRadius cardBorder = BorderRadius.circular(12.0);
+}
